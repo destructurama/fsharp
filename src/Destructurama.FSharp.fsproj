@@ -8,7 +8,7 @@
     <ProjectGuid>088a4030-7c7a-4434-964a-8e9e42db17f0</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Serilog.Extras.FSharp</RootNamespace>
-    <AssemblyName>Serilog.Extras.FSharp</AssemblyName>
+    <AssemblyName>Destructurama.FSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetProfile>netcore</TargetProfile>
@@ -23,7 +23,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\Serilog.Extras.FSharp.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Destructurama.FSharp.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
@@ -34,7 +34,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\Serilog.Extras.FSharp.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Destructurama.FSharp.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
@@ -43,8 +43,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.Portable.FSharp.Targets" />
   <ItemGroup>
-    <Compile Include="SerilogExtrasFSharp.fs" />
-    <None Include="Serilog.Extras.FSharp.nuspec" />
+    <Compile Include="DestructuramaFSharp.fs" />
+    <None Include="Destructurama.FSharp.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
@@ -52,11 +53,10 @@
       <AssemblyName>FSharp.Core.dll</AssemblyName>
       <HintPath>$(MSBuildExtensionsPath32)\..\Reference Assemblies\Microsoft\FSharp\.NETCore\$(TargetFSharpCoreVersion)\FSharp.Core.dll</HintPath>
     </Reference>
-    <ProjectReference Include="..\Serilog\Serilog.csproj">
-      <Name>Serilog</Name>
-      <Project>{0915dbd9-0f7c-4439-8d9e-74c3d579b219}</Project>
+    <Reference Include="Serilog">
+      <HintPath>..\packages\Serilog.1.4.204\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Serilog.dll</HintPath>
       <Private>True</Private>
-    </ProjectReference>
+    </Reference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,4 @@
-﻿// Copyright 2015 Serilog Contributors
+﻿// Copyright 2015 Destructurama Contributors, Serilog Contributors
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Serilog.Extras.FSharp
+namespace Destructurama.FSharp
 
 open Microsoft.FSharp.Reflection
 open Serilog.Core
@@ -41,7 +41,7 @@ type public UnionDestructuringPolicy() =
 namespace Serilog
 
 open Serilog.Configuration
-open Serilog.Extras.FSharp
+open Destructurama.FSharp
 
 [<AutoOpen>]
 module public LoggerDestructuringConfigurationExtensions =
