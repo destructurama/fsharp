@@ -68,7 +68,7 @@ function Invoke-Build($majorMinor, $patch, $customLogger, $notouch, $sln)
     
     Invoke-MSBuild $slnfile $customLogger
 
-    Invoke-NuGetPack $package
+    Invoke-NuGetPackSpec "src\Destructurama.FSharp.nuspec" $version
 }
 
 $ErrorActionPreference = "Stop"
