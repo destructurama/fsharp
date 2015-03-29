@@ -3,15 +3,15 @@
   <metadata>
     <id>Destructurama.FSharp</id>
     <version>$version$</version>
-    <authors>Serilog Contributors</authors>
-    <description>Adds support for F# language constructs to Serilog.</description>
+    <authors>Destructurama Contributors, Serilog Contributors</authors>
+    <description>Native support for destructuring F# types when logging to Serilog.</description>
     <language>en-US</language>
     <projectUrl>http://serilog.net</projectUrl>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <iconUrl>http://serilog.net/images/serilog-nuget.png</iconUrl>
+    <iconUrl>http://destructurama.github.io/pages/images/destructurama.png</iconUrl>
     <tags>serilog fsharp</tags>
     <dependencies>
-      <dependency id="Serilog" version="$version$" />
+      <dependency id="Serilog" version="1.4" />
     </dependencies>
   </metadata>
   <files>
