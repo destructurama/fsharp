@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Serilog.Extras.FSharp</id>
+    <id>Destructurama.FSharp</id>
     <version>$version$</version>
     <authors>Serilog Contributors</authors>
     <description>Adds support for F# language constructs to Serilog.</description>
@@ -15,8 +15,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\Serilog.Extras.FSharp.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
-    <file src="bin\Release\Serilog.Extras.FSharp.pdb" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
-    <file src="bin\Release\Serilog.Extras.FSharp.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+    <file src="bin\Release\Destructurama.FSharp.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+    <file src="bin\Release\Destructurama.FSharp.pdb" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+    <file src="bin\Release\Destructurama.FSharp.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
   </files>
 </package>
