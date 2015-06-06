@@ -17,21 +17,28 @@ namespace Destructurama.FSharp
 open Microsoft.FSharp.Reflection
 open Serilog.Core
 open Serilog.Events
+open System
 
 // Based on the sample from @vlaci in https://github.com/serilog/serilog/issues/352
 
-type public UnionDestructuringPolicy() =
+type public FSharpTypesDestructuringPolicy() =
     interface Serilog.Core.IDestructuringPolicy with
         member this.TryDestructure(value,
                                    propertyValueFactory : ILogEventPropertyValueFactory,
                                    result: byref<LogEventPropertyValue>) =
-            if FSharpType.IsUnion(value.GetType()) then
-                let case, fields = FSharpValue.GetUnionFields(value, value.GetType())
+            let valueType = value.GetType()
+            if valueType.IsConstructedGenericType && valueType.GetGenericTypeDefinition() = typedefof<List<_>> then
+                let elems = value :?> obj seq
+                            |> Seq.map(fun v -> propertyValueFactory.CreatePropertyValue(v, true))
+                result <- SequenceValue(elems)
+                true
+            else if FSharpType.IsUnion valueType then
+                let case, fields = FSharpValue.GetUnionFields(value, valueType)
 
-                let properties = Seq.zip (case.GetFields()) fields |>
-                                 Seq.map(fun (n, v) -> LogEventProperty(
-                                                           n.Name,
-                                                           propertyValueFactory.CreatePropertyValue(v, true)))
+                let properties = Seq.zip (case.GetFields()) fields
+                                 |> Seq.map(fun (n, v) -> LogEventProperty(
+                                                            n.Name,
+                                                            propertyValueFactory.CreatePropertyValue(v, true)))
 
                 result <- StructureValue(properties, case.Name)
                 true
@@ -47,5 +54,5 @@ open Destructurama.FSharp
 module public LoggerDestructuringConfigurationExtensions =
     type public LoggerDestructuringConfiguration with
         member public this.FSharpTypes() =
-            this.With<UnionDestructuringPolicy>()
+            this.With<FSharpTypesDestructuringPolicy>()
 
