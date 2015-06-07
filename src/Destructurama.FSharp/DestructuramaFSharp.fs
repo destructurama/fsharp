@@ -24,8 +24,8 @@ open System
 type public FSharpTypesDestructuringPolicy() =
     interface Serilog.Core.IDestructuringPolicy with
         member __.TryDestructure(value,
-                                   propertyValueFactory : ILogEventPropertyValueFactory,
-                                   result: byref<LogEventPropertyValue>) =
+                                 propertyValueFactory : ILogEventPropertyValueFactory,
+                                 result: byref<LogEventPropertyValue>) =
             let cpv obj = propertyValueFactory.CreatePropertyValue(obj, true)
             let lep (n:System.Reflection.PropertyInfo) (v:obj) = LogEventProperty(n.Name, cpv v)
             match value.GetType() with
@@ -33,7 +33,8 @@ type public FSharpTypesDestructuringPolicy() =
                 result <- SequenceValue(value |> FSharpValue.GetTupleFields |> Seq.map cpv)
                 true
             | t when t.IsConstructedGenericType && t.GetGenericTypeDefinition() = typedefof<List<_>> ->
-                result <- SequenceValue(value :?> obj seq |> Seq.map cpv)
+                let objEnumerable = value :?> System.Collections.IEnumerable |> Seq.cast<obj>
+                result <- SequenceValue(objEnumerable |> Seq.map cpv)
                 true
             | t when FSharpType.IsUnion t ->
                 let case, fields = FSharpValue.GetUnionFields(value, t)
