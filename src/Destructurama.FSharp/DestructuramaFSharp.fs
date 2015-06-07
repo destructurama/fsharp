@@ -23,27 +23,24 @@ open System
 
 type public FSharpTypesDestructuringPolicy() =
     interface Serilog.Core.IDestructuringPolicy with
-        member this.TryDestructure(value,
+        member __.TryDestructure(value,
                                    propertyValueFactory : ILogEventPropertyValueFactory,
                                    result: byref<LogEventPropertyValue>) =
-            let valueType = value.GetType()
-            if valueType.IsConstructedGenericType && valueType.GetGenericTypeDefinition() = typedefof<List<_>> then
-                let elems = value :?> obj seq
-                            |> Seq.map(fun v -> propertyValueFactory.CreatePropertyValue(v, true))
-                result <- SequenceValue(elems)
+            let cpv obj = propertyValueFactory.CreatePropertyValue(obj, true)
+            let lep (n:System.Reflection.PropertyInfo) (v:obj) = LogEventProperty(n.Name, cpv v)
+            match value.GetType() with
+            | t when FSharpType.IsTuple t ->
+                result <- SequenceValue(value |> FSharpValue.GetTupleFields |> Seq.map cpv)
                 true
-            else if FSharpType.IsUnion valueType then
-                let case, fields = FSharpValue.GetUnionFields(value, valueType)
-
-                let properties = Seq.zip (case.GetFields()) fields
-                                 |> Seq.map(fun (n, v) -> LogEventProperty(
-                                                            n.Name,
-                                                            propertyValueFactory.CreatePropertyValue(v, true)))
-
+            | t when t.IsConstructedGenericType && t.GetGenericTypeDefinition() = typedefof<List<_>> ->
+                result <- SequenceValue(value :?> obj seq |> Seq.map cpv)
+                true
+            | t when FSharpType.IsUnion t ->
+                let case, fields = FSharpValue.GetUnionFields(value, t)
+                let properties = (case.GetFields(), fields) ||> Seq.map2 lep
                 result <- StructureValue(properties, case.Name)
                 true
-            else
-                false
+            | _ -> false
 
 namespace Serilog
 
