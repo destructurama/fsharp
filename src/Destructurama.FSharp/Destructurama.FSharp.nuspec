@@ -11,7 +11,7 @@
     <iconUrl>http://destructurama.github.io/pages/images/destructurama.png</iconUrl>
     <tags>serilog fsharp</tags>
     <dependencies>
-      <dependency id="Serilog" version="1.4.204" />
+      <dependency id="Serilog" version="1.5.14" />
     </dependencies>
   </metadata>
   <files>
