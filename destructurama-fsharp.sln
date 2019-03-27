@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Destructurama.FSharp", "src\Destructurama.FSharp\Destructurama.FSharp.fsproj", "{088A4030-7C7A-4434-964A-8E9E42DB17F0}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Destructurama.FSharp", "src\Destructurama.FSharp\Destructurama.FSharp.fsproj", "{83E92B2F-0F5D-41A8-84DD-6E9A45A1C9BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{088A4030-7C7A-4434-964A-8E9E42DB17F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{088A4030-7C7A-4434-964A-8E9E42DB17F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{088A4030-7C7A-4434-964A-8E9E42DB17F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{088A4030-7C7A-4434-964A-8E9E42DB17F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83E92B2F-0F5D-41A8-84DD-6E9A45A1C9BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83E92B2F-0F5D-41A8-84DD-6E9A45A1C9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83E92B2F-0F5D-41A8-84DD-6E9A45A1C9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83E92B2F-0F5D-41A8-84DD-6E9A45A1C9BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD958677-2068-41FD-9438-81B660AC27C4}
 	EndGlobalSection
 EndGlobal

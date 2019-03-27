@@ -17,7 +17,6 @@ namespace Destructurama.FSharp
 open Microsoft.FSharp.Reflection
 open Serilog.Core
 open Serilog.Events
-open System
 
 // Based on the sample from @vlaci in https://github.com/serilog/serilog/issues/352
 
