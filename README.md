@@ -56,10 +56,18 @@ let main argv =
 
 ### Building the repo
 
-You should be able to clone down the repo and build with the dotnet sdk from the repository root.
+You should be able to clone down the repo and build with the dotnet sdk from the repository root:
 
 ```
 dotnet build
+```
+
+### Testing the repo
+
+There are tests in the Destructurama.FSharp.Test project, which can be run like so from the repo root:
+
+```
+dotnet test
 ```
 
 ### Releasing the repo
@@ -72,4 +80,4 @@ The packages can be built with the following command:
 dotnet pack -c Release -p:Version=<DESIRED_VERSION>
 ```
 
-This will result in a nuget package and a symbols packages being placed in `src/Destructurama.FSharp/bin/Release`.  These packages can be uploaded to nuget or the package repository of your choice.
+This will result in a nuget package and a symbols packages being placed in `src/Destructurama.FSharp/bin/Release`. These packages can be uploaded to nuget or the package repository of your choice.
