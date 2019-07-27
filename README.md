@@ -32,8 +32,8 @@ Depending on the log storage you use you’ll be able to query on the tag as wel
 
 You can enable this by installing the package from NuGet:
 
-```powershell
-Install-Package Destructurama.FSharp
+```
+dotnet add package Destructurama.FSharp
 ```
 
 and adding `Destructure.FSharpTypes()` to your logger configuration:
@@ -53,3 +53,23 @@ let main argv =
 
     0
 ```
+
+### Building the repo
+
+You should be able to clone down the repo and build with the dotnet sdk from the repository root.
+
+```
+dotnet build
+```
+
+### Releasing the repo
+
+Releasing involves building the nuget packages and uploading them to nuget.
+
+The packages can be built with the following command:
+
+```
+dotnet pack -c Release -p:Version=<DESIRED_VERSION>
+```
+
+This will result in a nuget package and a symbols packages being placed in `src/Destructurama.FSharp/bin/Release`.  These packages can be uploaded to nuget or the package repository of your choice.
