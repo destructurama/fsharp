@@ -20,7 +20,7 @@
     <IsPackable>true</IsPackable>
     <PackageId>Destructurama.FSharp</PackageId>
     <Title>F# Destructuring extensions for Serilog</Title>
-    <Authors>nblumhardt</Authors>
+    <Authors>Destructurama Contributors</Authors>
     <PackageDescription>Native support for destructuring F# types when logging to Serilog.</PackageDescription>
     <Description>
       A destructuring policy for Serilog loggers that understands how to unwrap and display common F# data types, such as Tuples and Unions.
@@ -29,6 +29,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIconUrl>http://destructurama.github.io/pages/images/destructurama.png</PackageIconUrl>
     <PackageTags>serilog fsharp</PackageTags>
+    <VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
   
   <ItemGroup>
