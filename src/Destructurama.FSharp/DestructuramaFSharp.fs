@@ -19,8 +19,6 @@ open Serilog.Core
 open Serilog.Events
 open System
 
-// Based on the sample from @vlaci in https://github.com/serilog/serilog/issues/352
-
 type public FSharpTypesDestructuringPolicy() =
     interface Serilog.Core.IDestructuringPolicy with
         member __.TryDestructure(value,
@@ -32,6 +30,7 @@ type public FSharpTypesDestructuringPolicy() =
             | t when FSharpType.IsTuple t ->
                 result <- SequenceValue(value |> FSharpValue.GetTupleFields |> Seq.map cpv)
                 true
+            // TODO: support for Maps and Sets? Why do Lists here when surely some IEnumerable-binder can handle them?
             | t when t.IsConstructedGenericType && t.GetGenericTypeDefinition() = typedefof<List<_>> ->
                 let objEnumerable = value :?> System.Collections.IEnumerable |> Seq.cast<obj>
                 result <- SequenceValue(objEnumerable |> Seq.map cpv)
