@@ -14,6 +14,6 @@ for path in src/**/*.fsproj; do
 done
 
 echo "🤖 Running tests..."
-for path in test/*.Tests/*.fsproj; do
+for path in test/*.Test/*.fsproj; do
     dotnet test -c Release ${path}
 done
