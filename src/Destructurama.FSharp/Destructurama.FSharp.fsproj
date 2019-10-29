@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!--
       We mimic the same frameworks as Serilog as much as we can.
@@ -29,7 +29,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIconUrl>http://destructurama.github.io/pages/images/destructurama.png</PackageIconUrl>
     <PackageTags>serilog fsharp</PackageTags>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
   </PropertyGroup>
   
   <ItemGroup>
