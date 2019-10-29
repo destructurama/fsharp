@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Destructurama.FSharp", "src\Destructurama.FSharp\Destructurama.FSharp.fsproj", "{088A4030-7C7A-4434-964A-8E9E42DB17F0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5E37CB62-35DD-4656-93A3-42A22902EB81}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Destructurama.FSharp.Test", "test\Destructurama.FSharp.Test\Destructurama.FSharp.Test.fsproj", "{0E3AEA7E-2D53-4DA2-BA22-02C612A64875}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,15 @@ Global
 		{088A4030-7C7A-4434-964A-8E9E42DB17F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{088A4030-7C7A-4434-964A-8E9E42DB17F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{088A4030-7C7A-4434-964A-8E9E42DB17F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E3AEA7E-2D53-4DA2-BA22-02C612A64875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E3AEA7E-2D53-4DA2-BA22-02C612A64875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E3AEA7E-2D53-4DA2-BA22-02C612A64875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E3AEA7E-2D53-4DA2-BA22-02C612A64875}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E3AEA7E-2D53-4DA2-BA22-02C612A64875} = {5E37CB62-35DD-4656-93A3-42A22902EB81}
 	EndGlobalSection
 EndGlobal
