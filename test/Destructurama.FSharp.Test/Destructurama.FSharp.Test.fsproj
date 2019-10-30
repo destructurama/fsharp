@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+<!--    NOTE we require newer versions than that used in the impl-->
+<!--    a) so we integration test with something fresh and can catch problems interoperating with newer versions-->
+<!--    b) FSharp.Core 4.6.2 is required in order to be able to use `ValueSome` in the test impl-->
     <PackageReference Include="FSharp.Core" Version="4.6.2" />
     <PackageReference Include="Serilog" Version="[2.8.0, 3.0.0)" />
 
