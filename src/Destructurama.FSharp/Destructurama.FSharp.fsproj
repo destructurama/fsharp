@@ -6,6 +6,8 @@
      -->
     <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+    <DisableImplicitSystemValueTupleReference>true</DisableImplicitSystemValueTupleReference>
+    <WarningLevel>5</WarningLevel>
     <GenerateDoc>true</GenerateDoc>
 
     <!-- Debug/Symbol properties -->
