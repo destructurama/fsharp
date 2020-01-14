@@ -46,7 +46,7 @@ let main argv =
 
     Log.Logger <- LoggerConfiguration()
         .Destructure.FSharpTypes()
-        .WriteTo.ColoredConsole()
+        .WriteTo.Console()
         .CreateLogger()
 
     Log.Information("Drawing a {@Shape}", Circle 5.)
