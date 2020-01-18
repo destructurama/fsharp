@@ -23,6 +23,7 @@ open System.Reflection
 open TypeShape
 open TypeShape.Core
 open System.Collections.Concurrent
+open System.Collections
 #endif
 
 module Impls =
@@ -47,11 +48,13 @@ module Impls =
                 | fields -> fields |> Seq.mapi (fun i f -> LogEventProperty(sprintf "Item%d" (i + 1), cpv f))
             result <- StructureValue(properties)
             true
+
         // TODO: support for Maps and Sets? Why do Lists here when surely some IEnumerable-binder can handle them?
         | t when t.IsConstructedGenericType && t.GetGenericTypeDefinition() = typedefof<List<_>> ->
             let objEnumerable = value :?> System.Collections.IEnumerable |> Seq.cast<obj>
             result <- SequenceValue(objEnumerable |> Seq.map cpv)
             true
+
         | t when t.IsGenericType && t.GetGenericTypeDefinition() = typedefof<option<obj>> -> 
             let optionTy = typedefof<Option<obj>>.MakeGenericType [| t.GenericTypeArguments.[0] |]
             // dirty hack because options have CompilationRepresentation.Null on the none case
@@ -68,12 +71,35 @@ module Impls =
             else
                 result <- StructureValue(Seq.singleton (LogEventProperty("Some", (factory.CreatePropertyValue(valueGetter value, true)))))
                 true
+
+        | t when t.IsGenericType && t.GetGenericTypeDefinition() = typedefof<Map<string, string>> ->
+            let keyType = t.GenericTypeArguments.[0]
+            let valueType = t.GenericTypeArguments.[1]
+            if keyType <> typeof<string>
+            then
+                false
+            else
+                let kvpType = typedefof<System.Collections.Generic.KeyValuePair<int, int>>.MakeGenericType([| keyType; valueType |])
+                let getKey =
+                    let p = kvpType.GetProperty("Key", BindingFlags.Public ||| BindingFlags.Instance)
+                    fun o -> p.GetValue(o, [| |]) :?> string
+                let getValue = 
+                    let v = kvpType.GetProperty("Value", BindingFlags.Public ||| BindingFlags.Instance)
+                    fun o -> v.GetValue(o, [| |])
+                let fields = 
+                    unbox<System.Collections.IEnumerable> value
+                    |> Seq.cast<obj>
+                    |> Seq.map (fun kvp -> LogEventProperty(getKey kvp, factory.CreatePropertyValue(getValue kvp, true)))
+                result <- StructureValue(fields)
+                true
+
         | t when FSharpType.IsUnion t ->
             let case, fields = FSharpValue.GetUnionFields(value, t)
             let properties = (case.GetFields(), fields) ||> Seq.map2 lep
             result <- StructureValue(properties, case.Name)
             true
-        | _ -> false
+        | _ ->
+            false
 #endif
 
 #if NETSTANDARD2_0
@@ -124,16 +150,42 @@ module Impls =
                         true, StructureValue(Seq.empty, "None") :> _
                     else
                         true, StructureValue(Seq.singleton (LogEventProperty("Some", (f.CreatePropertyValue(value v, true))))) :> _
-            // | Shape.FSharpUnion u ->
-            //     let caseMap =
-            //         u.UnionCases
-            //         |> Array.map (fun u -> u.CaseInfo.Name, readStructure u.CaseInfo.Name (getReaders u.Fields))
-            //         |> Map.ofArray
-            //     fun v f ->
-            //         let case, _ = FSharpValue.GetUnionFields(v, v.GetType())
-            //         match Map.tryFind case.Name caseMap with
-            //         | Some r -> true, r v f
-            //         | None -> false, null
+            | Shape.FSharpList l -> 
+                fun v f -> 
+                    let result = 
+                        unbox<IEnumerable> v
+                        |> Seq.cast<obj>
+                        |> Seq.map (fun o -> f.CreatePropertyValue(o, true))
+                        |> SequenceValue
+                    true, result :> _
+            | Shape.FSharpUnion u ->
+                // for some reason typeshape doesn't catch valueoptions as options, so we have to do this thing
+                if u.UnionCases.Length = 2 && u.UnionCases |> Array.map (fun c -> c.CaseInfo.Name) = [| "ValueNone"; "ValueSome" |]
+                then 
+                    let optionTy = typedefof<ValueOption<obj>>.MakeGenericType [| u.UnionCases.[1].Fields.[0].Member.Type |]
+                    // dirty hack because options have CompilationRepresentation.Null on the none case
+                    let isNone v = obj.ReferenceEquals(v, null)
+
+                    let value =
+                        let valueMember = optionTy.GetProperty("Value", BindingFlags.Public ||| BindingFlags.Instance)
+                        fun v -> valueMember.GetValue(v)
+
+                    fun v f ->
+                        if isNone v
+                        then
+                            true, StructureValue(Seq.empty, "None") :> _
+                        else
+                            true, StructureValue(Seq.singleton (LogEventProperty("Some", (f.CreatePropertyValue(value v, true))))) :> _
+                else
+                    let caseMap =
+                        u.UnionCases
+                        |> Array.map (fun u -> u.CaseInfo.Name, readStructure u.CaseInfo.Name (getReaders u.Fields))
+                        |> Map.ofArray
+                    fun v f ->
+                        let case, _ = FSharpValue.GetUnionFields(v, v.GetType())
+                        match Map.tryFind case.Name caseMap with
+                        | Some r -> true, r v f
+                        | None -> false, null
             | Shape.FSharpRecord r ->
                 let reader = readStructure null (getReaders r.Fields)
                 fun v f -> true, reader v f

@@ -4,7 +4,7 @@
       We mimic the same frameworks as Serilog as much as we can.
       FSharp.Core itself has a minimum bound of netstandard 1.6 for now, so that pins us.
      -->
-    <TargetFrameworks>netstandard1.6;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;</TargetFrameworks>
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
     <DisableImplicitSystemValueTupleReference>true</DisableImplicitSystemValueTupleReference>
     <WarningLevel>5</WarningLevel>

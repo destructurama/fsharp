@@ -65,20 +65,30 @@ let structure tag (props: (string * LogEventPropertyValue) seq) =
     StructureValue(props |> Seq.map LogEventProperty, tag)
 let scalar v = ScalarValue v :> LogEventPropertyValue
 
+
 [<Fact>]
-let ``can destructure tuple`` () = doDestructuring (1,2) (Structure(None, seq { yield "Item1", Scalar 1
-                                                                                yield "Item2", Scalar 2 }))
+let ``can destructure tuple`` () = doDestructuring (1,2) (Structure(None, seq { "Item1", Scalar 1
+                                                                                "Item2", Scalar 2 }))
 
 #if NETCOREAPP2_2
 [<Fact>]
-let ``can destructure struct tuple`` () = doDestructuring (struct (1,2)) (Structure(None, seq { yield "Item1", Scalar 1
-                                                                                                yield "Item2", Scalar 2}))
+let ``can destructure struct tuple`` () = doDestructuring (struct (1,2)) (Structure(None, seq { "Item1", Scalar 1
+                                                                                                "Item2", Scalar 2}))
 #endif
 
 [<Fact>]
-let ``can destructure option`` () = doDestructuring (Some "thing") (Structure(None, seq { yield "Some", Scalar "thing" }))
+let ``can destructure option`` () = doDestructuring (Some "thing") (Structure(None, seq { "Some", Scalar "thing" }))
+
+[<Fact>]
+let ``can destructure lists`` () = doDestructuring ([1;2;3]) (Sequence(seq { Scalar 1; Scalar 2; Scalar 3; }))
+
+[<Fact>]
+let ``can destructure maps`` () = doDestructuring (Map.ofList ["1",1; "2",2; "3",3]) (Structure(None, seq { "1", Scalar 1
+                                                                                                            "2", Scalar 2
+                                                                                                            "3", Scalar 3 }))
+
 
 #if NETCOREAPP2_2
 [<Fact>]
-let ``can destructure struct option`` () = doDestructuring (ValueSome "thing") (Structure(None, seq { yield "Some", Scalar "thing"}))
+let ``can destructure struct option`` () = doDestructuring (ValueSome "thing") (Structure(None, seq { "Some", Scalar "thing"}))
 #endif
