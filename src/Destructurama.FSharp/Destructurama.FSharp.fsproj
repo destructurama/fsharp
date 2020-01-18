@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!--
       We mimic the same frameworks as Serilog as much as we can.
@@ -6,6 +6,8 @@
      -->
     <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+    <DisableImplicitSystemValueTupleReference>true</DisableImplicitSystemValueTupleReference>
+    <WarningLevel>5</WarningLevel>
     <GenerateDoc>true</GenerateDoc>
 
     <!-- Debug/Symbol properties -->
@@ -29,7 +31,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIconUrl>http://destructurama.github.io/pages/images/destructurama.png</PackageIconUrl>
     <PackageTags>serilog fsharp</PackageTags>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
   </PropertyGroup>
   
   <ItemGroup>
@@ -37,13 +39,11 @@
   </ItemGroup>
   
   <ItemGroup>
-    <!--
-      We manually override the built-in version of FSharp.Core here so that the
-      version constraint range for package is better.  FSharp.Core is specifically
-      binary-compatible until breaking versions, so this is safe.
-    -->
-    <PackageReference Include="FSharp.Core" Version="[4.6.2, 5.0.0)" />
-    <PackageReference Include="Serilog" Version="[2.8.0, 3.0.0)" />
+    <!-- Only require pretty conservative FSharp.Core version (FSharp.Core 4.3.4 is the first version to cleanly support netstandard2.0)
+         We trust that there's no need to pin the upper bound on the FSharp.Core version -->
+    <PackageReference Include="FSharp.Core" Version="4.3.4" />
+    <!-- For Serilog, as we're closer, we can actively relax the requirement when the time comes (taking care to consider the testing matrix implied) -->
+    <PackageReference Include="Serilog" Version="[2.0.0, 3.0.0)" />
 
     <!-- Build tools -->
       <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19351-01" PrivateAssets="All"/>
