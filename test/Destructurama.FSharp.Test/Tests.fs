@@ -67,6 +67,29 @@ let scalar v = ScalarValue v :> LogEventPropertyValue
 
 
 [<Fact>]
+let ``can destructure lists`` () = doDestructuring [1;2;3] (Sequence(seq { Scalar 1; Scalar 2; Scalar 3; }))
+
+[<Fact>]
+let ``can destructure maps`` () = doDestructuring (Map.ofList ["1",1; "2",2; "3",3]) (Structure(None, seq { "1", Scalar 1
+                                                                                                            "2", Scalar 2
+                                                                                                            "3", Scalar 3 }))
+
+type U =
+| First
+| Second of int
+| Third of named: bool
+
+// commented out because it's hard to test the 'correct' destructuring without the actual property formatter instance...
+//[<Fact>]
+let ``can destructure unions`` () =
+    let expected = Sequence(seq {
+        Scalar First
+        Structure(Some "Second", seq { "Item", Scalar 2 })
+        Structure(Some "Third", seq { "named", Scalar false })
+    })
+    doDestructuring [First; Second 2; Third false] expected
+
+[<Fact>]
 let ``can destructure tuple`` () = doDestructuring (1,2) (Structure(None, seq { "Item1", Scalar 1
                                                                                 "Item2", Scalar 2 }))
 
@@ -78,15 +101,6 @@ let ``can destructure struct tuple`` () = doDestructuring (struct (1,2)) (Struct
 
 [<Fact>]
 let ``can destructure option`` () = doDestructuring (Some "thing") (Structure(None, seq { "Some", Scalar "thing" }))
-
-[<Fact>]
-let ``can destructure lists`` () = doDestructuring ([1;2;3]) (Sequence(seq { Scalar 1; Scalar 2; Scalar 3; }))
-
-[<Fact>]
-let ``can destructure maps`` () = doDestructuring (Map.ofList ["1",1; "2",2; "3",3]) (Structure(None, seq { "1", Scalar 1
-                                                                                                            "2", Scalar 2
-                                                                                                            "3", Scalar 3 }))
-
 
 #if NETCOREAPP2_2
 [<Fact>]
