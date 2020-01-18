@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFrameworks>netcoreapp2.2;netcoreapp1.1;</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
@@ -15,18 +15,27 @@
   </ItemGroup>
 
   <ItemGroup>
-<!--    NOTE we require newer versions than that used in the impl-->
-<!--    a) so we integration test with something fresh and can catch problems interoperating with newer versions-->
-<!--    b) FSharp.Core 4.6.2 is required in order to be able to use `ValueSome` in the test impl-->
-    <PackageReference Include="FSharp.Core" Version="4.6.2" />
     <PackageReference Include="Serilog" Version="[2.8.0, 3.0.0)" />
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Destructurama.FSharp\Destructurama.FSharp.fsproj" />
+  </ItemGroup>
+
+<!--    NOTE we require newer versions than that used in the impl-->
+<!--    a) so we integration test with something fresh and can catch problems interoperating with newer versions-->
+<!--    b) FSharp.Core 4.6.2 is required in order to be able to use `ValueSome` in the test impl-->
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.1'">
+    <PackageReference Include="FSharp.Core" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
+    <PackageReference Include="FSharp.Core" Version="4.7.0" />
   </ItemGroup>
 
 </Project>
