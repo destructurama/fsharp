@@ -41,7 +41,7 @@ module Impls =
         match value.GetType() with
         | t when FSharpType.IsTuple t ->
             let fields = FSharpValue.GetTupleFields value
-            let properties = 
+            let properties =
                 match fields with
                 | [||] -> Seq.empty
                 | [| f |] -> Seq.singleton (LogEventProperty("Item", cpv f))
@@ -55,7 +55,7 @@ module Impls =
             result <- SequenceValue(objEnumerable |> Seq.map cpv)
             true
 
-        | t when t.IsGenericType && t.GetGenericTypeDefinition() = typedefof<option<obj>> -> 
+        | t when t.IsGenericType && t.GetGenericTypeDefinition() = typedefof<option<obj>> ->
             let optionTy = typedefof<Option<obj>>.MakeGenericType [| t.GenericTypeArguments.[0] |]
             // dirty hack because options have CompilationRepresentation.Null on the none case
             let isNone v = obj.ReferenceEquals(v, null)
@@ -83,10 +83,10 @@ module Impls =
                 let getKey =
                     let p = kvpType.GetProperty("Key", BindingFlags.Public ||| BindingFlags.Instance)
                     fun o -> p.GetValue(o, [| |]) :?> string
-                let getValue = 
+                let getValue =
                     let v = kvpType.GetProperty("Value", BindingFlags.Public ||| BindingFlags.Instance)
                     fun o -> v.GetValue(o, [| |])
-                let fields = 
+                let fields =
                     unbox<System.Collections.IEnumerable> value
                     |> Seq.cast<obj>
                     |> Seq.map (fun kvp -> LogEventProperty(getKey kvp, factory.CreatePropertyValue(getValue kvp, true)))
@@ -150,18 +150,36 @@ module Impls =
                         true, StructureValue(Seq.empty, "None") :> _
                     else
                         true, StructureValue(Seq.singleton (LogEventProperty("Some", (f.CreatePropertyValue(value v, true))))) :> _
-            | Shape.FSharpList l -> 
-                fun v f -> 
-                    let result = 
+            | Shape.FSharpList l ->
+                fun v f ->
+                    let result =
                         unbox<IEnumerable> v
                         |> Seq.cast<obj>
                         |> Seq.map (fun o -> f.CreatePropertyValue(o, true))
                         |> SequenceValue
                     true, result :> _
+            | Shape.FSharpMap m ->
+                if m.Key.Type <> typeof<string>
+                then fun v f -> false, null
+                else
+                    let kvpType = typedefof<System.Collections.Generic.KeyValuePair<int, int>>.MakeGenericType([| m.Key.Type; m.Value.Type |])
+                    let getKey =
+                        let p = kvpType.GetProperty("Key", BindingFlags.Public ||| BindingFlags.Instance)
+                        fun o -> p.GetValue(o, [| |]) :?> string
+                    let getValue =
+                        let v = kvpType.GetProperty("Value", BindingFlags.Public ||| BindingFlags.Instance)
+                        fun o -> v.GetValue(o, [| |])
+                    
+                    fun v f -> 
+                        let fields =
+                            unbox<System.Collections.IEnumerable> v
+                            |> Seq.cast<obj>
+                            |> Seq.map (fun kvp -> LogEventProperty(getKey kvp, f.CreatePropertyValue(getValue kvp, true)))
+                        true, StructureValue(fields) :> _
             | Shape.FSharpUnion u ->
                 // for some reason typeshape doesn't catch valueoptions as options, so we have to do this thing
                 if u.UnionCases.Length = 2 && u.UnionCases |> Array.map (fun c -> c.CaseInfo.Name) = [| "ValueNone"; "ValueSome" |]
-                then 
+                then
                     let optionTy = typedefof<ValueOption<obj>>.MakeGenericType [| u.UnionCases.[1].Fields.[0].Member.Type |]
                     // dirty hack because options have CompilationRepresentation.Null on the none case
                     let isNone v = obj.ReferenceEquals(v, null)
