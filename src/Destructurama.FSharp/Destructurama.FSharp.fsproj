@@ -39,9 +39,10 @@
   <ItemGroup>
     <!--
       We manually override the built-in version of FSharp.Core here so that the
-      version constraint range for package is better.
+      version constraint range for package is better.  FSharp.Core is specifically
+      binary-compatible until breaking versions, so this is safe.
     -->
-    <PackageReference Include="FSharp.Core" Version="[4.6.2, 4.7.0)" />
+    <PackageReference Include="FSharp.Core" Version="[4.6.2, 5.0.0)" />
     <PackageReference Include="Serilog" Version="[2.8.0, 3.0.0)" />
 
     <!-- Build tools -->

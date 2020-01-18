@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- copied from the library project exactly, still not guaranteed to be the same, thanks Nuget. -->
-    <PackageReference Include="FSharp.Core" Version="[4.6.2, 4.7.0)" />
+    <PackageReference Include="FSharp.Core" Version="[4.6.2, 5.0.0)" />
     <PackageReference Include="Serilog" Version="[2.8.0, 3.0.0)" />
 
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
