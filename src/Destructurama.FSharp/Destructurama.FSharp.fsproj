@@ -4,7 +4,7 @@
       We mimic the same frameworks as Serilog as much as we can.
       FSharp.Core itself has a minimum bound of netstandard 1.6 for now, so that pins us.
      -->
-    <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;</TargetFrameworks>
     <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
     <DisableImplicitSystemValueTupleReference>true</DisableImplicitSystemValueTupleReference>
     <WarningLevel>5</WarningLevel>
@@ -44,8 +44,13 @@
     <PackageReference Include="FSharp.Core" Version="4.3.4" />
     <!-- For Serilog, as we're closer, we can actively relax the requirement when the time comes (taking care to consider the testing matrix implied) -->
     <PackageReference Include="Serilog" Version="[2.0.0, 3.0.0)" />
-
+    
     <!-- Build tools -->
-      <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19351-01" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19351-01" PrivateAssets="All"/>
   </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="TypeShape" Version="8.0.1" />
+  </ItemGroup>
+
 </Project>

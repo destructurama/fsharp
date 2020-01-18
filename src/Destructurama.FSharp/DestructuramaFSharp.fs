@@ -17,30 +17,49 @@ namespace Destructurama.FSharp
 open Microsoft.FSharp.Reflection
 open Serilog.Core
 open Serilog.Events
-open System
+open System.Reflection
+
+#if NETSTANDARD2_0
+open TypeShape
+#endif
+
+module Impls =
+    let destructureNetstandard16(value: obj, factory: ILogEventPropertyValueFactory, result: byref<LogEventPropertyValue>): bool = 
+        let inline cpv obj = factory.CreatePropertyValue(obj, true)
+        let inline lep (n: PropertyInfo) (v:obj) = LogEventProperty(n.Name, cpv v)
+
+        match value.GetType() with
+        | t when FSharpType.IsTuple t ->
+            result <- SequenceValue(value |> FSharpValue.GetTupleFields |> Seq.map cpv)
+            true
+        // TODO: support for Maps and Sets? Why do Lists here when surely some IEnumerable-binder can handle them?
+        | t when t.IsConstructedGenericType && t.GetGenericTypeDefinition() = typedefof<List<_>> ->
+            let objEnumerable = value :?> System.Collections.IEnumerable |> Seq.cast<obj>
+            result <- SequenceValue(objEnumerable |> Seq.map cpv)
+            true
+        | t when FSharpType.IsUnion t ->
+            let case, fields = FSharpValue.GetUnionFields(value, t)
+            let properties = (case.GetFields(), fields) ||> Seq.map2 lep
+            result <- StructureValue(properties, case.Name)
+            true
+        | _ -> false
+
+#if NETSTANDARD2_0
+    let destructureNetstandard20(value: obj, factory: ILogEventPropertyValueFactory, result: byref<LogEventPropertyValue>): bool = 
+        destructureNetstandard16(value, factory, &result)
+#endif
 
 type public FSharpTypesDestructuringPolicy() =
     interface Serilog.Core.IDestructuringPolicy with
         member __.TryDestructure(value,
                                  propertyValueFactory : ILogEventPropertyValueFactory,
                                  result: byref<LogEventPropertyValue>) =
-            let cpv obj = propertyValueFactory.CreatePropertyValue(obj, true)
-            let lep (n:System.Reflection.PropertyInfo) (v:obj) = LogEventProperty(n.Name, cpv v)
-            match value.GetType() with
-            | t when FSharpType.IsTuple t ->
-                result <- SequenceValue(value |> FSharpValue.GetTupleFields |> Seq.map cpv)
-                true
-            // TODO: support for Maps and Sets? Why do Lists here when surely some IEnumerable-binder can handle them?
-            | t when t.IsConstructedGenericType && t.GetGenericTypeDefinition() = typedefof<List<_>> ->
-                let objEnumerable = value :?> System.Collections.IEnumerable |> Seq.cast<obj>
-                result <- SequenceValue(objEnumerable |> Seq.map cpv)
-                true
-            | t when FSharpType.IsUnion t ->
-                let case, fields = FSharpValue.GetUnionFields(value, t)
-                let properties = (case.GetFields(), fields) ||> Seq.map2 lep
-                result <- StructureValue(properties, case.Name)
-                true
-            | _ -> false
+#if NETSTANDARD1_6
+            Impls.destructureNetstandard16(value, propertyValueFactory, &result)
+#endif
+#if NETSTANDARD2_0
+            Impls.destructureNetstandard20(value, propertyValueFactory, &result)
+#endif
 
 namespace Serilog
 
