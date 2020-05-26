@@ -40,6 +40,12 @@ type public FSharpTypesDestructuringPolicy() =
                 let properties = (case.GetFields(), fields) ||> Seq.map2 lep
                 result <- StructureValue(properties, case.Name)
                 true
+            | t when FSharpType.IsRecord t ->
+                let fields = FSharpValue.GetRecordFields value
+                let fieldNames = FSharpType.GetRecordFields t
+                let properties = (fieldNames, fields) ||> Seq.map2 lep
+                result <- StructureValue(properties, t.Name)
+                true
             | _ -> false
 
 namespace Serilog
