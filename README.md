@@ -1,6 +1,6 @@
-﻿# Destructurama.FSharp
+# Destructurama.FSharp
 
-[![Build status](https://ci.appveyor.com/api/projects/status/w01f9aej35xgg8tu/branch/master?svg=true)](https://ci.appveyor.com/project/Destructurama/fsharp/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/w01f9aej35xgg8tu/branch/dev?svg=true)](https://ci.appveyor.com/project/Destructurama/fsharp/branch/dev)
 
 Native support for destructuring F# types when logging to Serilog.
 
