@@ -28,6 +28,20 @@ Are printed nicely like:
 
 Depending on the log storage you use you’ll be able to query on the tag as well as the fields (like Radius) from the union.
 
+More samples can be seen by running the project in the `samples` folder using `dotnet run`. Doing so will destructure a union, record, and a tuple with and without this package to highlight the difference:
+
+```
+➜  samples git:(records) ✗ dotnet run
+[13:35:19 INF] Printing a {"quantity": 10, "label": "hi", "Tag": 2, "IsA": false, "IsB": false, "IsC": true, "$type": "C"} with poor destructuring
+[13:35:19 INF] Printing a {"quantity": 10, "label": "hi", "$type": "C"} with better destructuring
+
+[13:35:19 INF] Printing a {"FieldA": 10, "OtherField": true, "AnotherOne": {"quantity": 10, "label": "hi", "Tag": 2, "IsA": false, "IsB": false, "IsC": true, "$type": "C"}, "$type": "MyRecord"} with poor destructuring
+[13:35:19 INF] Printing a {"FieldA": 10, "OtherField": true, "AnotherOne": {"quantity": 10, "label": "hi", "$type": "C"}, "$type": "MyRecord"} with better destructuring
+
+[13:35:19 INF] Printing a {"Item1": 1, "Item2": "hi", "$type": "Tuple`2"} with poor destructuring
+[13:35:19 INF] Printing a [1, "hi"] with better destructuring
+```
+
 ### Enabling the package
 
 You can enable this by installing the package from NuGet:
