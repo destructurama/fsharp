@@ -29,10 +29,10 @@
     </Description>
     <Copyright>Copyright 2019 Destructurama Contributors, Serilog Contributors</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageIconUrl>http://destructurama.github.io/pages/images/destructurama.png</PackageIconUrl>
+    <iconUrl>http://destructurama.github.io/pages/images/destructurama.png</iconUrl>
     <PackageProjectUrl>https://github.com/destructurama/fsharp</PackageProjectUrl>
     <PackageTags>serilog fsharp</PackageTags>
-    <VersionPrefix>1.1.1</VersionPrefix>
+    <VersionPrefix>1.1.2</VersionPrefix>
   </PropertyGroup>
   
   <ItemGroup>
@@ -42,7 +42,7 @@
   <ItemGroup>
     <!-- Only require pretty conservative FSharp.Core version (FSharp.Core 4.3.4 is the first version to cleanly support netstandard2.0)
          We trust that there's no need to pin the upper bound on the FSharp.Core version -->
-    <PackageReference Include="FSharp.Core" Version="4.3.4" />
+    <PackageReference Include="FSharp.Core" Version="[4.3.4,)" />
     <!-- For Serilog, as we're closer, we can actively relax the requirement when the time comes (taking care to consider the testing matrix implied) -->
     <PackageReference Include="Serilog" Version="[2.0.0, 3.0.0)" />
 
