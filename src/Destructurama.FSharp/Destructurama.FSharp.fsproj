@@ -29,7 +29,7 @@
     </Description>
     <Copyright>Copyright 2019 Destructurama Contributors, Serilog Contributors</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageIconUrl>http://destructurama.github.io/pages/images/destructurama.png</PackageIconUrl>
+    <iconUrl>http://destructurama.github.io/pages/images/destructurama.png</iconUrl>
     <PackageProjectUrl>https://github.com/destructurama/fsharp</PackageProjectUrl>
     <PackageTags>serilog fsharp</PackageTags>
     <VersionPrefix>1.1.2</VersionPrefix>
