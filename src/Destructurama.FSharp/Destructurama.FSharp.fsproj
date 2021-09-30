@@ -32,7 +32,7 @@
     <iconUrl>http://destructurama.github.io/pages/images/destructurama.png</iconUrl>
     <PackageProjectUrl>https://github.com/destructurama/fsharp</PackageProjectUrl>
     <PackageTags>serilog fsharp</PackageTags>
-    <VersionPrefix>1.2.0</VersionPrefix>
+    <VersionPrefix>1.2.1</VersionPrefix>
   </PropertyGroup>
   
   <ItemGroup>
