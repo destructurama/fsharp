@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/github/license/destructurama/fsharp)
 
-[![codecov](https://codecov.io/gh/destructurama/fsharp/graph/badge.svg?token=Ma2sUoqqb1)](https://codecov.io/gh/destructurama/fsharp)
+[![codecov](https://codecov.io/gh/destructurama/fsharp/graph/badge.svg?token=cmGjxrA7Lh)](https://codecov.io/gh/destructurama/fsharp)
 [![Nuget](https://img.shields.io/nuget/dt/Destructurama.FSharp)](https://www.nuget.org/packages/Destructurama.FSharp)
 [![Nuget](https://img.shields.io/nuget/v/Destructurama.FSharp)](https://www.nuget.org/packages/Destructurama.FSharp)
 
@@ -18,7 +18,6 @@
 [![Run unit tests](https://github.com/destructurama/fsharp/actions/workflows/test.yml/badge.svg)](https://github.com/destructurama/fsharp/actions/workflows/test.yml)
 [![Publish preview to GitHub registry](https://github.com/destructurama/fsharp/actions/workflows/publish-preview.yml/badge.svg)](https://github.com/destructurama/fsharp/actions/workflows/publish-preview.yml)
 [![Publish release to Nuget registry](https://github.com/destructurama/fsharp/actions/workflows/publish-release.yml/badge.svg)](https://github.com/destructurama/fsharp/actions/workflows/publish-release.yml)
-[![CodeQL analysis](https://github.com/destructurama/fsharp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/destructurama/fsharp/actions/workflows/codeql-analysis.yml)
 
 Native support for destructuring F# types when logging to [Serilog](https://serilog.net).
 
