@@ -1,52 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <!--
-      We mimic the same frameworks as Serilog as much as we can.
-      FSharp.Core itself has a minimum bound of netstandard 1.6 for now, so that pins us.
-     -->
-    <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
-    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
-    <DisableImplicitSystemValueTupleReference>true</DisableImplicitSystemValueTupleReference>
-    <WarningLevel>5</WarningLevel>
-    <GenerateDoc>true</GenerateDoc>
 
-    <!-- Debug/Symbol properties -->
-    <DebugType>portable</DebugType>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <!-- Explicitly allowing PDBs in the main package because it's much nicer for consumers/tooling and this is a small library. -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    
-    <!-- Nuget Package properties -->
-    <IsPackable>true</IsPackable>
-    <PackageId>Destructurama.FSharp</PackageId>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Title>F# Destructuring extensions for Serilog</Title>
-    <Authors>Destructurama Contributors</Authors>
-    <PackageDescription>Native support for destructuring F# types when logging to Serilog.</PackageDescription>
-    <Description>
-      A destructuring policy for Serilog loggers that understands how to unwrap and display common F# data types, such as Tuples and Unions.
-    </Description>
-    <Copyright>Copyright 2019 Destructurama Contributors, Serilog Contributors</Copyright>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <iconUrl>http://destructurama.github.io/pages/images/destructurama.png</iconUrl>
-    <PackageProjectUrl>https://github.com/destructurama/fsharp</PackageProjectUrl>
-    <PackageTags>serilog fsharp</PackageTags>
-    <VersionPrefix>1.2.0</VersionPrefix>
+    <Description>Native support for destructuring F# types when logging to Serilog.</Description>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <Compile Include="DestructuramaFSharp.fs" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <!-- Only require pretty conservative FSharp.Core version (FSharp.Core 4.3.4 is the first version to cleanly support netstandard2.0)
-         We trust that there's no need to pin the upper bound on the FSharp.Core version -->
-    <PackageReference Include="FSharp.Core" Version="[4.3.4,)" />
-    <!-- For Serilog, as we're closer, we can actively relax the requirement when the time comes (taking care to consider the testing matrix implied) -->
-    <PackageReference Include="Serilog" Version="[2.0.0, 3.0.0)" />
 
-    <!-- Build tools -->
-      <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19351-01" PrivateAssets="All"/>
+  <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="8.0.101" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
   </ItemGroup>
+
 </Project>
