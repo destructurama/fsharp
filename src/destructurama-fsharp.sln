@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E04FD6C9-DAD9-4B05-9B70-37B352AFA435}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\codecov.yml = ..\.github\codecov.yml
+		..\.github\dependabot.yml = ..\.github\dependabot.yml
+		..\.github\labeler.yml = ..\.github\labeler.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{02B58A5F-3C66-472A-AB3F-70A913F1D071}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\ISSUE_TEMPLATE\bug_report.md = ..\.github\ISSUE_TEMPLATE\bug_report.md
+		..\.github\ISSUE_TEMPLATE\feature_request.md = ..\.github\ISSUE_TEMPLATE\feature_request.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{2CABB670-FD92-4BFB-AA43-DD4C8605DEF4}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\label.yml = ..\.github\workflows\label.yml
+		..\.github\workflows\publish-preview.yml = ..\.github\workflows\publish-preview.yml
+		..\.github\workflows\publish-release.yml = ..\.github\workflows\publish-release.yml
+		..\.github\workflows\stale.yml = ..\.github\workflows\stale.yml
+		..\.github\workflows\test.yml = ..\.github\workflows\test.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBE68C82-C588-4836-8200-7FAD48D82B36}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\CHANGES.md = ..\CHANGES.md
+		..\assets\Destructurama.snk = ..\assets\Destructurama.snk
+		Directory.Build.props = Directory.Build.props
+		..\assets\icon.png = ..\assets\icon.png
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Destructurama.FSharp", "Destructurama.FSharp\Destructurama.FSharp.fsproj", "{6C333E70-C1A2-43F8-AD72-6A7F57662C56}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Samples", "Samples\Samples.fsproj", "{AD9C6104-B53B-4E82-8443-EDDC67B95323}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Destructurama.FSharp.Tests", "Destructurama.FSharp.Tests\Destructurama.FSharp.Tests.fsproj", "{B6F7958D-77DF-44DB-9355-5EB8988F5F2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C333E70-C1A2-43F8-AD72-6A7F57662C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C333E70-C1A2-43F8-AD72-6A7F57662C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C333E70-C1A2-43F8-AD72-6A7F57662C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C333E70-C1A2-43F8-AD72-6A7F57662C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9C6104-B53B-4E82-8443-EDDC67B95323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9C6104-B53B-4E82-8443-EDDC67B95323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9C6104-B53B-4E82-8443-EDDC67B95323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9C6104-B53B-4E82-8443-EDDC67B95323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F7958D-77DF-44DB-9355-5EB8988F5F2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F7958D-77DF-44DB-9355-5EB8988F5F2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F7958D-77DF-44DB-9355-5EB8988F5F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F7958D-77DF-44DB-9355-5EB8988F5F2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02B58A5F-3C66-472A-AB3F-70A913F1D071} = {E04FD6C9-DAD9-4B05-9B70-37B352AFA435}
+		{2CABB670-FD92-4BFB-AA43-DD4C8605DEF4} = {E04FD6C9-DAD9-4B05-9B70-37B352AFA435}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B010940F-261F-4E35-80D7-18813783DB37}
+	EndGlobalSection
+EndGlobal

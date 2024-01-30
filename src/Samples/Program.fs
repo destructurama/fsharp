@@ -1,9 +1,6 @@
-﻿// Learn more about F# at http://fsharp.org
+// Learn more about F# at http://fsharp.org
 
-open System
 open Serilog
-open Serilog.Configuration
-open Serilog.Sinks
 
 let goodLogger =
     LoggerConfiguration()
@@ -11,15 +8,15 @@ let goodLogger =
         .WriteTo.Console()
         .CreateLogger()
 
-let badLogger = 
+let badLogger =
     LoggerConfiguration()
         .WriteTo.Console()
         .CreateLogger()
 
 type Union = A | B of bool | C of quantity: int * label: string
 
-type MyRecord = 
-    { FieldA : int 
+type MyRecord =
+    { FieldA : int
       OtherField: bool
       AnotherOne: Union }
 
@@ -30,8 +27,8 @@ let main argv =
 
     badLogger.Information("Printing a {@union} with poor destructuring", union)
     goodLogger.Information("Printing a {@union} with better destructuring", union)
-    
-    let record = 
+
+    let record =
         { FieldA = 10
           OtherField = true
           AnotherOne = union }
