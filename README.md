@@ -1,5 +1,9 @@
 # Destructurama.FSharp
 
+# ATTENTION! Looking for maintainers
+
+See https://github.com/destructurama/fsharp/issues/34
+
 ![License](https://img.shields.io/github/license/destructurama/fsharp)
 
 [![codecov](https://codecov.io/gh/destructurama/fsharp/graph/badge.svg?token=cmGjxrA7Lh)](https://codecov.io/gh/destructurama/fsharp)
