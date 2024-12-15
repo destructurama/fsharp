@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);FS3261</WarningsNotAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
