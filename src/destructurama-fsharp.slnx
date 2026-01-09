@@ -18,6 +18,7 @@
   <Folder Name="/Solution Items/">
     <File Path="../.editorconfig" />
     <File Path="../.gitignore" />
+    <File Path="../.globalconfig" />
     <File Path="../assets/Destructurama.snk" />
     <File Path="../assets/icon.png" />
     <File Path="../CHANGES.md" />
@@ -25,6 +26,7 @@
     <File Path="../README.md" />
     <File Path="Directory.Build.props" />
   </Folder>
+  <Project Path=".net.csproj" />
   <Project Path="Destructurama.FSharp.Tests/Destructurama.FSharp.Tests.fsproj" />
   <Project Path="Destructurama.FSharp/Destructurama.FSharp.fsproj" />
   <Project Path="Samples/Samples.fsproj" />
