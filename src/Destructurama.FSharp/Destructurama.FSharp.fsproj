@@ -1,10 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Title>F# Destructuring extensions for Serilog</Title>
     <Description>Native support for destructuring F# types when logging to Serilog.</Description>
-    <WarningsNotAsErrors>$(WarningsNotAsErrors);FS3261</WarningsNotAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
