@@ -40,13 +40,13 @@ type public FSharpTypesDestructuringPolicy() =
                 true
             | t when FSharpType.IsUnion t ->
                 let case, fields = FSharpValue.GetUnionFields(value, t)
-                let properties = (case.GetFields(), fields) ||> Seq.map2 lep
+                let properties = (case.GetFields(), Array.map nonNull fields) ||> Seq.map2 lep
                 result <- StructureValue(properties, case.Name)
                 true
             | t when FSharpType.IsRecord t ->
                 let fields = FSharpValue.GetRecordFields value
                 let fieldNames = FSharpType.GetRecordFields t
-                let properties = (fieldNames, fields) ||> Seq.map2 lep
+                let properties = (fieldNames, Array.map nonNull fields) ||> Seq.map2 lep
                 result <- StructureValue(properties, t.Name)
                 true
             | _ -> false

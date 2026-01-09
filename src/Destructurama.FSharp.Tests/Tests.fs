@@ -21,7 +21,7 @@ let policy =
 let inline doDestructuring data =
     match policy.TryDestructure(data, alwaysTrueConverter) with
     | true, property ->
-        printfn "rendered data \n%A as \n%s" data (property.ToString())
+        printfn "rendered data \n%A as \n%s" data (string property)
     | false, _ ->
         failwithf "was unable to destructure an object of type %s" (data.GetType().FullName)
 
@@ -32,7 +32,9 @@ let ``can destructure tuple`` () = doDestructuring (1,2)
 let ``can destructure struct tuple`` () = doDestructuring (struct (1,2))
 
 [<Fact>]
+#nowarn FS3261
 let ``can destructure union`` () = doDestructuring (Some "thing")
+#warnon FS3261
 
 [<Fact>]
 let ``can destructure struct union`` () = doDestructuring (ValueSome "thing")
