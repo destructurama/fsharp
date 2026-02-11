@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="10.0.102" />
-    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog" Version="4.3.1" />
   </ItemGroup>
 
 </Project>
