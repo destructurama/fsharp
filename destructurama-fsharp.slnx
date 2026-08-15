@@ -21,9 +21,9 @@
     <File Path="assets/Destructurama.snk" />
     <File Path="assets/icon.png" />
     <File Path="CHANGES.md" />
+    <File Path="Directory.Build.props" />
     <File Path="LICENSE" />
     <File Path="README.md" />
-    <File Path="src/Directory.Build.props" />
   </Folder>
   <Project Path=".net.csproj" />
   <Project Path="src/Destructurama.FSharp.Tests/Destructurama.FSharp.Tests.fsproj" />
