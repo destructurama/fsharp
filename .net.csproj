@@ -6,4 +6,8 @@
     <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="assets/**/*" />
+  </ItemGroup>
+
 </Project>
