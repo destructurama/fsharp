@@ -6,8 +6,4 @@
     <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DotNetProjectFile.Analyzers" Version="1.15.2" PrivateAssets="all" />
-  </ItemGroup>
- 
 </Project>

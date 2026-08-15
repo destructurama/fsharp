@@ -1,10 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsPackable>true</IsPackable>
-    <Title>F# Destructuring extensions for Serilog</Title>
-    <Description>Native support for destructuring F# types when logging to Serilog.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,12 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="11.0.100" />
-    <PackageReference Include="Serilog" Version="4.4.0" />
+    <PackageReference Include="FSharp.Core" />
+    <PackageReference Include="Serilog" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference PrivateAssets="All" Include="MinVer" Version="7.0.0" />
+    <PackageReference PrivateAssets="All" Include="MinVer" />
   </ItemGroup>
 
   <ItemGroup>
