@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="src/Destructurama.FSharp.Tests/Destructurama.FSharp.Tests.fsproj" />
+  <Project Path="src/Destructurama.FSharp/Destructurama.FSharp.fsproj" />
+  <Project Path="src/Samples/Samples.fsproj" />
+</Solution>

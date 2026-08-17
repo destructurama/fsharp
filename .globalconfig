@@ -1,0 +1,4 @@
+is_global = true
+
+# Remove unnecessary import https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0005
+dotnet_diagnostic.IDE0005.severity = warning

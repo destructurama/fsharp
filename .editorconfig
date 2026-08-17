@@ -254,12 +254,7 @@ dotnet_naming_rule.async_methods_end_in_async.style = end_in_async_style
 
 # dotnet_naming_style.<styleTitle>.<property> = <value>
 dotnet_naming_style.end_in_async_style.capitalization = pascal_case
-dotnet_naming_style.end_in_async_style.word_separator =
-dotnet_naming_style.end_in_async_style.required_prefix =
 dotnet_naming_style.end_in_async_style.required_suffix = Async
 
 # dotnet_naming_rule.<namingRuleTitle>.severity = <value>
 dotnet_naming_rule.async_methods_end_in_async.severity = warning
-
-# Remove unnecessary import https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0005
-dotnet_diagnostic.IDE0005.severity = warning
